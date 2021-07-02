@@ -3,19 +3,12 @@ CC			=	clang
 FLAGS		=	-Wall -Wextra -Werror
 INC			=	-I ./inc
 OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
-SRC			=	src/destroy_fd.c \
-				src/destroy.c \
-				src/die.c \
-				src/execute.c \
-				src/expanse.c \
-				src/launch.c \
-				src/parsing.c \
-				src/pipex.c \
-				src/transform.c \
-				src/unix_functions.c
+SRC			=	src/philosophers.c
 
 all:		obj $(NAME)
 
+test:		all
+			./philo
 
 $(NAME):	$(OBJ)
 			$(CC) $(FLAGS) -fsanitize=address -o $@ $^ $(LIB)
