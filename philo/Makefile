@@ -3,7 +3,10 @@ CC			=	clang
 FLAGS		=	-Wall -Wextra -Werror
 INC			=	-I ./inc
 OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
-SRC			=	src/philosophers.c
+SRC			=	src/input_parse.c \
+				src/input_read.c \
+				src/philosophers.c \
+				src/utils.c
 
 all:		obj $(NAME)
 
