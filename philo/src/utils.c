@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmarcha <gmarcha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:07:17 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/03 17:22:01 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/04 13:28:27 by gmarcha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,13 @@ int	ft_aredigits(const char *str)
 		str++;
 	}
 	return (1);
+}
+
+t_msec	ft_current_time(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) == -1)
+		return (0);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
