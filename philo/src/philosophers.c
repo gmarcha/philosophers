@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmarcha <gmarcha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:17:15 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/03 19:02:54 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/04 13:31:15 by gmarcha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void	*clear_threads(pthread_t *philos, pthread_mutex_t *forks, size_t nb_
 
 void	*philo_routine(void *args)
 {
-	printf("%lu is thinking\n", ((t_philo *)args)->index_philo + 1);
 	pthread_mutex_lock(((t_philo *)args)->forks + ((t_philo *)args)->index_philo);
 	pthread_mutex_lock(((t_philo *)args)->forks + (((t_philo *)args)->index_philo + 1 % ((t_philo *)args)->nb_philo));
 	printf("%lu is eating\n", ((t_philo *)args)->index_philo + 1);
@@ -64,6 +63,8 @@ void	*philo_routine(void *args)
 	pthread_mutex_unlock(((t_philo *)args)->forks + (((t_philo *)args)->index_philo + 1 % ((t_philo *)args)->nb_philo));
 	printf("%lu is sleeping\n", ((t_philo *)args)->index_philo + 1);
 	usleep((useconds_t)(((t_philo *)args)->time_to_sleep * 1000));
+	printf("%lu is thinking\n", ((t_philo *)args)->index_philo + 1);
+	// printf("%lu died\n", ((t_philo *)args)->index_philo + 1);
 	return (NULL);
 }
 
@@ -81,21 +82,17 @@ void	*create_threads(t_philo *args, size_t nb_philo)
 	while (++i < nb_philo)
 		if (pthread_mutex_init(forks + i, NULL) != 0)
 			return (clear_mutex(philos, forks, i));
-	i = 0;
-	while (i < nb_philo)
-		args[i++].forks = forks;
+	i = -1;
+	while (++i < nb_philo)
+		args[i].forks = forks;
 	i = -1;
 	while (++i < nb_philo)
 		if (pthread_create(philos + i, NULL, philo_routine, args + i) != 0)
 			return (clear_threads(philos, forks, nb_philo, i));
-	i = 0;
-	while (i < nb_philo)
-	{
+	i = -1;
+	while (++i < nb_philo)
 		if (pthread_join(philos[i], NULL) != 0)
 			return (clear_mutex(philos, forks, nb_philo));
-		printf("%lu died\n", philos[i]);
-		i++;
-	}
 	return (clear_mutex(philos, forks, nb_philo));
 }
 
@@ -104,6 +101,7 @@ int	main(int ac, char *av[])
 	int				nb_philo;
 	t_philo			*args;
 
+	usleep(2147483647);
 	nb_philo = read_input(av, (size_t)ac);
 	if (nb_philo == -1)
 		return (EXIT_FAILURE);
