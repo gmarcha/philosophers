@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmarcha <gmarcha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:13:17 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/03 18:53:51 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/04 13:33:07 by gmarcha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 # define PROGRAM_NAME	"philosophers"
 
+typedef unsigned long	t_msec;
+
 typedef struct s_philo
 {
 	size_t			nb_philo;
@@ -31,7 +33,7 @@ typedef struct s_philo
 	size_t			time_to_sleep;
 	int				nb_meals;
 	pthread_mutex_t	*forks;
-}					t_philo;
+}						t_philo;
 
 ///  ///////////////////////////////////////  ///
 ///  ///          INPUT READING          ///  ///
@@ -56,5 +58,6 @@ t_philo		*parse_input(char *input[], size_t nb_philo);
 size_t		ft_strlen(const char *s);
 long		ft_atol(const char *nptr);
 int			ft_aredigits(const char *str);
+t_msec		ft_current_time(void);
 
 #endif
