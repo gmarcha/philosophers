@@ -7,8 +7,18 @@ SRC			=	src/input/input_parse.c \
 				src/input/input_read.c \
 				src/philo/philo_death.c \
 				src/philo/philo_routine.c \
-				src/philosophers.c \
-				src/utils.c
+				src/pthread/pthread_allocate_mutex_threads.c \
+				src/pthread/pthread_clear_mutex.c \
+				src/pthread/pthread_clear_threads.c \
+				src/pthread/pthread_destroy_mutex_threads.c \
+				src/pthread/pthread_init_mutex.c \
+				src/pthread/pthread_init_threads.c \
+				src/utils/ft_aredigits.c \
+				src/utils/ft_atol.c \
+				src/utils/ft_current_time.c \
+				src/utils/ft_sleep.c \
+				src/utils/ft_strlen.c \
+				src/philosophers.c
 CLR			=	"\\033[2K"
 
 all:		obj $(NAME)
@@ -31,6 +41,7 @@ obj:
 			@mkdir -p obj/input
 			@mkdir -p obj/philo
 			@mkdir -p obj/pthread
+			@mkdir -p obj/utils
 
 clean:
 			@rm -rf $(OBJ) obj
