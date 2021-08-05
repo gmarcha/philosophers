@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmarcha <gmarcha@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:07:17 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/04 13:28:27 by gmarcha          ###   ########.fr       */
+/*   Updated: 2021/08/05 16:08:44 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,13 @@ t_msec	ft_current_time(void)
 	if (gettimeofday(&tv, NULL) == -1)
 		return (0);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void	ft_sleep(t_msec ms)
+{
+	t_msec			start;
+
+	start = ft_current_time();
+	while (ft_current_time() - start < ms)
+		usleep(100);
 }
