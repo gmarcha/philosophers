@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:13:17 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 19:27:19 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 19:37:14 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ typedef struct s_philo
 ///  ////////////////////////////////////////////////////  ///
 
 int			read_input(char *input[], size_t input_size);
-//	Input validity check:
-//	- input is a valid integer, and is integer overflowing.
+//	Check if inputs are digits-strings, and if are valid integers.
 t_philo		*parse_input(char *input[], size_t nb_philo);
-//	Create args, as structure array, for pthread_create calls:
-//	- parsing parameters in a specific structure for each philosophers.
+//	Create args, as structure array, for each philosopher.
 
 ///  /////////////////////////////////////////////////////  ///
 ///  ///          THREADS AND MUTEX FUNCTIONS          ///  ///
@@ -79,16 +77,20 @@ void		destroy_mutex_threads(t_threads *threads);
 ///  ///////////////////////////////////////////////  ///
 
 void		*philo_routine(void *args);
+//	Philosopher routine: thinking, eating, and sleeping.
 void		*philo_death(void *args);
+//	Philosopher keeper: monitoring philosopher starvation.
 
 ///  ///////////////////////////////  ///
 ///  ///          UTILS          ///  ///
 ///  ///////////////////////////////  ///
 
+void		ft_sleep(t_msec ms);
+//	Wrapper to usleep function, to enforce waiting time.
+t_msec		ft_current_time(void);
+//	Function to retrieve time since Epoch (01/01/70), in milliseconds.
 size_t		ft_strlen(const char *s);
 long		ft_atol(const char *nptr);
 int			ft_aredigits(const char *str);
-t_msec		ft_current_time(void);
-void		ft_sleep(t_msec ms);
 
 #endif
