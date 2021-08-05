@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:29:27 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 16:01:38 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 16:05:23 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	hehe(t_msec ms)
 
 	start = ft_current_time();
 	while (ft_current_time() - start < ms)
-		usleep(10);
+		usleep(100);
 }
 
 static void	wrap_usleep(t_msec hell)
