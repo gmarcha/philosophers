@@ -6,18 +6,30 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:29:27 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 19:31:16 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 19:56:53 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+static void	take_fork(t_philo *args, size_t id_fork)
+{
+	t_msec			timer;
+
+	pthread_mutex_lock(args->forks + id_fork);
+	pthread_mutex_lock(args->death);
+	timer = ft_current_time() - args->begin_time;
+	if (args->died == 0)
+		printf("%lu %lu has taken a fork\n", timer, args->id_philo + 1);
+	pthread_mutex_unlock(args->death);
+}
+
 static int	philo_eating(t_philo *args, int *index_meals)
 {
 	t_msec			timer;
 
-	pthread_mutex_lock(args->forks + args->id_philo);
-	pthread_mutex_lock(args->forks + (args->id_philo + 1 % args->nb_philo));
+	take_fork(args, args->id_philo);
+	take_fork(args, args->id_philo + 1 % args->nb_philo);
 	pthread_mutex_lock(args->death);
 	args->last_meal = ft_current_time();
 	pthread_mutex_unlock(args->death);
