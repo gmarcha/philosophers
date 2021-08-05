@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:29:27 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 16:08:57 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 16:33:31 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*philo_routine(void *args)
 	{
 		pthread_mutex_lock(((t_philo *)args)->death);
 		if (((t_philo *)args)->died == 0)
-			printf("%lu is thinking\n", ((t_philo *)args)->index_philo + 1);
+			printf("%lu %lu is thinking\n", ft_current_time() - ((t_philo *)args)->begin_time, ((t_philo *)args)->index_philo + 1);
 		pthread_mutex_unlock(((t_philo *)args)->death);
 
 		pthread_mutex_lock(((t_philo *)args)->forks + ((t_philo *)args)->index_philo);
@@ -30,7 +30,7 @@ void	*philo_routine(void *args)
 
 		pthread_mutex_lock(((t_philo *)args)->death);
 		if (((t_philo *)args)->died == 0)
-			printf("%lu is eating\n", ((t_philo *)args)->index_philo + 1);
+			printf("%lu %lu is eating\n", ft_current_time() - ((t_philo *)args)->begin_time, ((t_philo *)args)->index_philo + 1);
 		pthread_mutex_unlock(((t_philo *)args)->death);
 		ft_sleep(((t_philo *)args)->time_to_eat);
 
@@ -39,7 +39,7 @@ void	*philo_routine(void *args)
 
 		pthread_mutex_lock(((t_philo *)args)->death);
 		if (((t_philo *)args)->died == 0)
-			printf("%lu is sleeping\n", ((t_philo *)args)->index_philo + 1);
+			printf("%lu %lu is sleeping\n", ft_current_time() - ((t_philo *)args)->begin_time, ((t_philo *)args)->index_philo + 1);
 		pthread_mutex_unlock(((t_philo *)args)->death);
 		ft_sleep(((t_philo *)args)->time_to_sleep);
 	}

@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:17:15 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 15:35:02 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 16:32:05 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,14 @@ static int	init_mutex(t_threads *threads, t_philo *args, size_t nb_philo)
 
 static int	init_threads(t_threads *threads, t_philo *args, size_t nb_philo)
 {
+	t_msec			time;
 	size_t			i;
 
+	time = ft_current_time();
 	i = -1;
 	while (++i < nb_philo)
 	{
+		args[i].begin_time = time;
 		args[i].last_meal = ft_current_time();
 		pthread_create(threads->philos + i, NULL, philo_routine, args + i);
 		args[i].philos = threads->philos[i];
