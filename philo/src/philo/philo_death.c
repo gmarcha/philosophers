@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:29:29 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 18:12:48 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 19:09:45 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 void	*philo_death(void *args)
 {
+	t_msec			timer;
 	size_t			i;
 
 	while (((t_philo *)args)->died == 0)
 	{
 		pthread_mutex_lock(((t_philo *)args)->death);
+		timer = ft_current_time() - ((t_philo *)args)->last_meal;
 		if (((t_philo *)args)->done == 1)
 			((t_philo *)args)->died = 1;
 		else if (((t_philo *)args)->died == 0
-			&& ft_current_time() - ((t_philo *)args)->last_meal > ((t_philo *)args)->time_to_die)
+			&& timer > ((t_philo *)args)->time_to_die)
 		{
-			printf("%lu %lu died\n", ft_current_time() - ((t_philo *)args)->begin_time, ((t_philo *)args)->index_philo + 1);
+			timer = ft_current_time() - ((t_philo *)args)->begin_time;
+			printf("%lu %lu died\n", timer, ((t_philo *)args)->index_philo + 1);
 			i = -1;
 			while (++i < ((t_philo *)args)->nb_philo)
 				((t_philo *)args)->args[i].died = 1;
