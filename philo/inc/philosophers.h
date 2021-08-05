@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:13:17 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 18:04:31 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 19:03:25 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_threads
 	pthread_t		*medics;
 }						t_threads;
 
-
 typedef struct s_philo
 {
 	t_msec			begin_time;
@@ -53,23 +52,31 @@ typedef struct s_philo
 	struct s_philo	*args;
 }						t_philo;
 
-///  ///////////////////////////////////////  ///
-///  ///          INPUT READING          ///  ///
-///  ///////////////////////////////////////  ///
+///  ////////////////////////////////////////////////////  ///
+///  ///          INPUT PARSING AND CHECKING          ///  ///
+///  ////////////////////////////////////////////////////  ///
 
 int			read_input(char *input[], size_t input_size);
 //	Input validity check:
 //	- input is a valid integer, and is integer overflowing.
-
-///  ///////////////////////////////////////  ///
-///  ///          INPUT PARSING          ///  ///
-///  ///////////////////////////////////////  ///
-
 t_philo		*parse_input(char *input[], size_t nb_philo);
 //	Create args, as structure array, for pthread_create calls:
 //	- parsing parameters in a specific structure for each philosophers.
 
+///  /////////////////////////////////////////////////////  ///
+///  ///          THREADS AND MUTEX FUNCTIONS          ///  ///
+///  /////////////////////////////////////////////////////  ///
 
+int			init_mutex(t_threads *threads, t_philo *args, size_t nb_philo);
+void		clear_mutex(t_threads *threads, size_t size);
+void		clear_threads(t_threads *threads, size_t nb_philo);
+int			init_threads(t_threads *threads, t_philo *args, size_t nb_philo);
+int			allocate_mutex_threads(t_threads *threads, size_t nb_philo);
+void		destroy_mutex_threads(t_threads *threads);
+
+///  ///////////////////////////////////////////////  ///
+///  ///          PHILOSOPHERS ROUTINES          ///  ///
+///  ///////////////////////////////////////////////  ///
 
 void		*philo_routine(void *args);
 void		*philo_death(void *args);
