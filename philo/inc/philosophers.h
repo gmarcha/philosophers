@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:13:17 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 16:49:31 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 18:04:31 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_threads
 
 typedef struct s_philo
 {
+	t_msec			begin_time;
 	size_t			nb_philo;
 	size_t			index_philo;
 	size_t			time_to_die;
@@ -44,7 +45,7 @@ typedef struct s_philo
 	size_t			time_to_sleep;
 	int				nb_meals;
 	t_msec			last_meal;
-	t_msec			begin_time;
+	t_bool			done;
 	t_bool			died;
 	pthread_mutex_t	*death;
 	pthread_mutex_t	*forks;

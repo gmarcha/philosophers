@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:29:27 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 16:51:28 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 18:07:37 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	*philo_routine(void *args)
 {
+	int				index_meals;
+
+	index_meals = 0;
 	while (1)
 	{
 		pthread_mutex_lock(((t_philo *)args)->death);
@@ -36,6 +39,15 @@ void	*philo_routine(void *args)
 
 		pthread_mutex_unlock(((t_philo *)args)->forks + ((t_philo *)args)->index_philo);
 		pthread_mutex_unlock(((t_philo *)args)->forks + (((t_philo *)args)->index_philo + 1 % ((t_philo *)args)->nb_philo));
+
+		index_meals++;
+		if (((t_philo *)args)->nb_meals >= 0 && index_meals >= ((t_philo *)args)->nb_meals)
+		{
+			pthread_mutex_lock(((t_philo *)args)->death);
+			((t_philo *)args)->done = 1;
+			pthread_mutex_unlock(((t_philo *)args)->death);
+			return (NULL);
+		}
 
 		pthread_mutex_lock(((t_philo *)args)->death);
 		if (((t_philo *)args)->died == 0)

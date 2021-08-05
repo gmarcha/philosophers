@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:17:15 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 16:50:47 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 17:41:38 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ static int	allocate_mutex_threads(t_threads *threads, size_t nb_philo)
 	threads->forks = malloc(sizeof(pthread_mutex_t) * nb_philo);
 	threads->philos = malloc(sizeof(pthread_t) * nb_philo);
 	threads->medics = malloc(sizeof(pthread_t) * nb_philo);
-	if (threads->forks == NULL
+	if (threads->death == NULL
+		|| threads->forks == NULL
 		|| threads->philos == NULL
 		|| threads->medics == NULL)
 	{
+		if (threads->death != NULL)
+			free(threads->death);
 		if (threads->forks != NULL)
 			free(threads->forks);
 		if (threads->philos != NULL)
