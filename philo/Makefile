@@ -24,7 +24,12 @@ CLR			=	"\\033[2K"
 all:		obj $(NAME)
 
 test:		all
-			./philo
+			./philo 1 800 200 200
+			./philo 2
+			./philo 4 410 200 200
+			./philo 5 800 200 200
+			./philo 4 310 200 100
+			./philo 5 800 200 200 7
 
 $(NAME):	$(OBJ)
 			@echo "$(CLR)$(NAME): compilation done"
