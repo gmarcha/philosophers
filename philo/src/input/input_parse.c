@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:07:29 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 18:04:59 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 19:27:19 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_philo	*parse_input(char *input[], size_t nb_philo)
 	while (i < nb_philo)
 	{
 		args[i].nb_philo = nb_philo;
-		args[i].index_philo = i;
+		args[i].id_philo = i;
 		args[i].time_to_die = (size_t)ft_atol(input[1]);
 		args[i].time_to_eat = (size_t)ft_atol(input[2]);
 		args[i].time_to_sleep = (size_t)ft_atol(input[3]);

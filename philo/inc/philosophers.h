@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:13:17 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 19:03:25 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 19:27:19 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_philo
 {
 	t_msec			begin_time;
 	size_t			nb_philo;
-	size_t			index_philo;
+	size_t			id_philo;
 	size_t			time_to_die;
 	size_t			time_to_eat;
 	size_t			time_to_sleep;
