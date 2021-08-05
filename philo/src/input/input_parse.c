@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:07:29 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/03 18:41:54 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 12:38:58 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_philo	*parse_input(char *input[], size_t nb_philo)
 			args[i].nb_meals = (int)ft_atol(input[4]);
 		else
 			args[i].nb_meals = -1;
+		args[i].died = 0;
+		args[i].args = args;
 		i++;
 	}
 	return (args);
