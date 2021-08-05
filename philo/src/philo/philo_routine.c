@@ -6,29 +6,11 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:29:27 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 16:05:23 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 16:08:57 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-static void	hehe(t_msec ms)
-{
-	t_msec			start;
-
-	start = ft_current_time();
-	while (ft_current_time() - start < ms)
-		usleep(100);
-}
-
-static void	wrap_usleep(t_msec hell)
-{
-	t_msec			start;
-	
-	start = ft_current_time();
-	hehe(hell);
-	printf("SLEEP: %lu\n", ft_current_time() - start);
-}
 
 void	*philo_routine(void *args)
 {
@@ -50,7 +32,7 @@ void	*philo_routine(void *args)
 		if (((t_philo *)args)->died == 0)
 			printf("%lu is eating\n", ((t_philo *)args)->index_philo + 1);
 		pthread_mutex_unlock(((t_philo *)args)->death);
-		wrap_usleep(((t_philo *)args)->time_to_eat);
+		ft_sleep(((t_philo *)args)->time_to_eat);
 
 		pthread_mutex_unlock(((t_philo *)args)->forks + ((t_philo *)args)->index_philo);
 		pthread_mutex_unlock(((t_philo *)args)->forks + (((t_philo *)args)->index_philo + 1 % ((t_philo *)args)->nb_philo));
@@ -59,7 +41,7 @@ void	*philo_routine(void *args)
 		if (((t_philo *)args)->died == 0)
 			printf("%lu is sleeping\n", ((t_philo *)args)->index_philo + 1);
 		pthread_mutex_unlock(((t_philo *)args)->death);
-		wrap_usleep(((t_philo *)args)->time_to_sleep);
+		ft_sleep(((t_philo *)args)->time_to_sleep);
 	}
 	return (NULL);
 }
