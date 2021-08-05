@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:13:17 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 15:34:05 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/05 16:08:42 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ size_t		ft_strlen(const char *s);
 long		ft_atol(const char *nptr);
 int			ft_aredigits(const char *str);
 t_msec		ft_current_time(void);
+void		ft_sleep(t_msec ms);
 
 #endif
