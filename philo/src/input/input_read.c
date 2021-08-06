@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:12:20 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/06 07:49:35 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/06 07:54:54 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ static int	input_check(char *input[], size_t input_size)
 	if (ft_strlen(input[input_size]) > 10)
 		return (handle_input_invalid("argument overflow"));
 	tmp = ft_atol(input[input_size]);
-	if (input_size == 4 || input_size == 0)
+	if (input_size == 4 || input_size == 1 || input_size == 0)
 	{
 		if (tmp > 2147483647)
 			return (handle_input_invalid("argument overflow"));
-		if (tmp == 0)
-			return (-2);
+		if (input_size == 4 || input_size == 0)
+			if (tmp == 0)
+				return (-2);
 	}
 	if (input_size == 3 || input_size == 2)
 	{
