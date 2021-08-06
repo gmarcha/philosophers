@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 05:50:58 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/06 06:09:33 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/06 06:13:17 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	take_fork(t_philo *args, size_t id_fork)
 	t_msec			timer;
 
 	pthread_mutex_lock(args->forks + id_fork);
+	printf("How ?\n");
 	ret = 1;
 	pthread_mutex_lock(args->death);
 	timer = ft_current_time() - args->begin_time;
