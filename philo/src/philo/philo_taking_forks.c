@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 05:50:58 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/06 06:13:17 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/06 06:18:52 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	philo_taking_forks(t_philo *args)
 		pthread_mutex_unlock(args->forks + args->id_philo);
 		return (1);
 	}
-	printf("GO RIGHT: %lu\n", args->id_philo);
+	printf("GO RIGHT: %lu\n", args->id_philo + 1 % args->nb_philo);
 	if (take_fork(args, args->id_philo + 1 % args->nb_philo) == 1)
 	{
 		pthread_mutex_unlock(args->forks + args->id_philo);
