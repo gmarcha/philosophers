@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:17:15 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 19:02:53 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/06 07:52:00 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	main(int ac, char *av[])
 	nb_philo = read_input(av, (size_t)ac);
 	if (nb_philo == -1)
 		return (EXIT_FAILURE);
+	else if (nb_philo == -2)
+		return (EXIT_SUCCESS);
 	args = parse_input(av + 1, (size_t)nb_philo);
 	if (args == NULL)
 		return (EXIT_FAILURE);

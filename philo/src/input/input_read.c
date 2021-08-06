@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 17:12:20 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 18:42:29 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/06 07:49:35 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,32 @@ static int	handle_input_invalid(char *errmsg)
 	return (-1);
 }
 
+static int	input_check(char *input[], size_t input_size)
+{
+	long			tmp;
+
+	if (ft_strlen(input[input_size]) > 10)
+		return (handle_input_invalid("argument overflow"));
+	tmp = ft_atol(input[input_size]);
+	if (input_size == 4 || input_size == 0)
+	{
+		if (tmp > 2147483647)
+			return (handle_input_invalid("argument overflow"));
+		if (tmp == 0)
+			return (-2);
+	}
+	if (input_size == 3 || input_size == 2)
+	{
+		if (tmp > 4294967)
+			return (handle_input_invalid("argument overflow"));
+	}
+	return (0);
+}
+
 static int	is_input_valid(char *input[], size_t input_size)
 {
+	int				tmp;
+
 	while (input_size != 0)
 	{
 		input_size--;
@@ -27,9 +51,9 @@ static int	is_input_valid(char *input[], size_t input_size)
 			return (handle_input_invalid("argument is not an integer"));
 		while (*input[input_size] == '0')
 			input[input_size]++;
-		if (ft_strlen(input[input_size]) > 10
-			|| ft_atol(input[input_size]) > 2147483647l)
-			return (handle_input_invalid("argument overflow"));
+		tmp = input_check(input, input_size);
+		if (tmp != 0)
+			return (tmp);
 	}
 	return ((int)ft_atol(input[input_size]));
 }
