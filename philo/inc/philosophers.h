@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 14:13:17 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 19:37:14 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/06 05:51:51 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,14 @@ void		destroy_mutex_threads(t_threads *threads);
 ///  ///////////////////////////////////////////////  ///
 
 void		*philo_routine(void *args);
-//	Philosopher routine: thinking, eating, and sleeping.
+//	Philosopher main routine: thinking, eating, and sleeping.
 void		*philo_death(void *args);
 //	Philosopher keeper: monitoring philosopher starvation.
+int			philo_thinking(t_philo *args);
+int			philo_eating(t_philo *args);
+int			philo_sleeping(t_philo *args);
+int			philo_taking_forks(t_philo *args);
+void		philo_release_forks(t_philo *args);
 
 ///  ///////////////////////////////  ///
 ///  ///          UTILS          ///  ///
