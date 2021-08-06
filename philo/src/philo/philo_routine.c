@@ -6,41 +6,21 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 08:29:27 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/08/05 19:56:53 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/08/06 05:51:37 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	take_fork(t_philo *args, size_t id_fork)
+static void	update_last_meal_time(t_philo *args)
 {
-	t_msec			timer;
-
-	pthread_mutex_lock(args->forks + id_fork);
-	pthread_mutex_lock(args->death);
-	timer = ft_current_time() - args->begin_time;
-	if (args->died == 0)
-		printf("%lu %lu has taken a fork\n", timer, args->id_philo + 1);
-	pthread_mutex_unlock(args->death);
-}
-
-static int	philo_eating(t_philo *args, int *index_meals)
-{
-	t_msec			timer;
-
-	take_fork(args, args->id_philo);
-	take_fork(args, args->id_philo + 1 % args->nb_philo);
 	pthread_mutex_lock(args->death);
 	args->last_meal = ft_current_time();
 	pthread_mutex_unlock(args->death);
-	pthread_mutex_lock(args->death);
-	timer = ft_current_time() - args->begin_time;
-	if (args->died == 0)
-		printf("%lu %lu is eating\n", timer, args->id_philo + 1);
-	pthread_mutex_unlock(args->death);
-	ft_sleep(args->time_to_eat);
-	pthread_mutex_unlock(args->forks + args->id_philo);
-	pthread_mutex_unlock(args->forks + (args->id_philo + 1 % args->nb_philo));
+}
+
+static int	update_index_meals(t_philo *args, int *index_meals)
+{
 	(*index_meals)++;
 	if (args->nb_meals >= 0 && *index_meals >= args->nb_meals)
 	{
@@ -54,27 +34,23 @@ static int	philo_eating(t_philo *args, int *index_meals)
 
 void	*philo_routine(void *args)
 {
-	t_msec			timer;
 	int				index_meals;
 
 	index_meals = 0;
 	while (1)
 	{
-		pthread_mutex_lock(((t_philo *)args)->death);
-		timer = ft_current_time() - ((t_philo *)args)->begin_time;
-		if (((t_philo *)args)->died == 0)
-			printf("%lu %lu is thinking\n",
-				timer, ((t_philo *)args)->id_philo + 1);
-		pthread_mutex_unlock(((t_philo *)args)->death);
-		if (philo_eating(args, &index_meals) == -1)
+		if (philo_thinking(args) == 1)
 			return (NULL);
-		pthread_mutex_lock(((t_philo *)args)->death);
-		timer = ft_current_time() - ((t_philo *)args)->begin_time;
-		if (((t_philo *)args)->died == 0)
-			printf("%lu %lu is sleeping\n",
-				timer, ((t_philo *)args)->id_philo + 1);
-		pthread_mutex_unlock(((t_philo *)args)->death);
-		ft_sleep(((t_philo *)args)->time_to_sleep);
+		if (philo_taking_forks(args) == 1)
+			return (NULL);
+		update_last_meal_time(args);
+		if (philo_eating(args) == 1)
+			return (NULL);
+		philo_release_forks(args);
+		if (update_index_meals(args, &index_meals) == 1)
+			return (NULL);
+		if (philo_sleeping(args) == 1)
+			return (NULL);
 	}
 	return (NULL);
 }
