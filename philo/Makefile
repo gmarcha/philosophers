@@ -6,7 +6,12 @@ OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 SRC			=	src/input/input_parse.c \
 				src/input/input_read.c \
 				src/philo/philo_death.c \
+				src/philo/philo_eating.c \
+				src/philo/philo_release_forks.c \
 				src/philo/philo_routine.c \
+				src/philo/philo_sleeping.c \
+				src/philo/philo_taking_forks.c \
+				src/philo/philo_thinking.c \
 				src/pthread/pthread_allocate_mutex_threads.c \
 				src/pthread/pthread_clear_mutex.c \
 				src/pthread/pthread_clear_threads.c \
