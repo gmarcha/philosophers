@@ -40,7 +40,7 @@ int	init_threads(t_threads *threads, t_philo *args, size_t nb_philo)
 	while (++i < nb_philo)
 	{
 		args[i].begin_time = time;
-		args[i].last_meal = ft_current_time();
+		args[i].last_meal = time;
 		if (pthread_create(threads->philos + i, NULL,
 				philo_routine, args + i) != 0)
 		{
