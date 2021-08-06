@@ -27,7 +27,7 @@ static int	input_check(char *input[], size_t input_size)
 	tmp = ft_atol(input[input_size]);
 	if (input_size == 4 || input_size == 1 || input_size == 0)
 	{
-		if (input_size == 1)
+		if (input_size == 0)
 		{
 			if (tmp > 23441)
 				return (handle_input_invalid("argument overflow"));
